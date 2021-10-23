@@ -5,17 +5,17 @@ This repository is used for creating rdbms docker images
 ### MySQL
 
 ```
-root@DESKTOP-8BDL7KA:/home/shinya/git/rdbms-docker/mysql# docker-compose -f ./docker-compose.yml up -d
+root@DESKTOP-8BDL7KA:# docker-compose -f ./docker-compose.yml up -d
 Creating mysql_db_1 ...
 Creating mysql_db_1 ... done
 
 
-root@DESKTOP-8BDL7KA:/home/shinya/git/rdbms-docker/mysql# docker-compose ps
+root@DESKTOP-8BDL7KA:# docker-compose ps
    Name                Command             State                           Ports
 --------------------------------------------------------------------------------------------------------
 mysql_db_1   docker-entrypoint.sh mysqld   Up      0.0.0.0:13306->3306/tcp,:::13306->3306/tcp, 33060/tcp
 
-root@DESKTOP-8BDL7KA:/home/shinya/git/rdbms-docker/mysql# mysql -h 127.0.0.1 -P 13306 -u root -p
+root@DESKTOP-8BDL7KA:# mysql -h 127.0.0.1 -P 13306 -u root -p
 Enter password:
 Welcome to the MySQL monitor.  Commands end with ; or \g.
 Your MySQL connection id is 8
@@ -40,14 +40,14 @@ mysql> select @@version;
 mysql> exit
 Bye
 
-root@DESKTOP-8BDL7KA:/home/shinya/git/rdbms-docker/mysql# docker-compose ps
+root@DESKTOP-8BDL7KA:# docker-compose ps
    Name                Command             State                           Ports
 --------------------------------------------------------------------------------------------------------
 mysql_db_1   docker-entrypoint.sh mysqld   Up      0.0.0.0:13306->3306/tcp,:::13306->3306/tcp, 33060/tcp
 
-root@DESKTOP-8BDL7KA:/home/shinya/git/rdbms-docker/mysql# docker-compose stop
+root@DESKTOP-8BDL7KA:# docker-compose stop
 Stopping mysql_db_1 ... done
-root@DESKTOP-8BDL7KA:/home/shinya/git/rdbms-docker/mysql# docker-compose ps
+root@DESKTOP-8BDL7KA:# docker-compose ps
    Name                Command             State    Ports
 ---------------------------------------------------------
 mysql_db_1   docker-entrypoint.sh mysqld   Exit 0
