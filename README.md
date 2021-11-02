@@ -428,7 +428,7 @@ mysql>
 ```
 
 
-### Using .env file for store not sharable information.
+### Using .env file for storing not shareable information.
 
 ※　アカウントやパスワードを環境変数に入れています。（Gitで共有出来ない情報をローカルのみに保持）
 
