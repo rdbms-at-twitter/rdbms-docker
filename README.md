@@ -428,6 +428,77 @@ mysql>
 ```
 
 
+### Using .env file for store not sharable information.
+
+※　アカウントやパスワードを環境変数に入れています。（Gitで共有出来ない情報をローカルのみに保持）
+
+```
+shinya@DESKTOP-8BDL7KA:~/git/rdbms-docker/mysql$ cat docker-compose-with-env-and-volume.yml
+version: "3"
+
+services:
+    db:
+       image: mysql:8.0
+       volumes:
+         - mysql-store:/var/lib/mysql
+       # - ./docker/mysql/data:/var/lib/mysql
+         - ./docker/mysql/logs:/var/log/mysql
+         - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+       environment:
+         - MYSQL_DATABASE=${DB_NAME}
+         - MYSQL_USER=${DB_USER}
+         - MYSQL_PASSWORD=${DB_PASSWORD}
+         - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+         - TZ="Asia/Tokyo"
+      #command: mysqld --character-set-server=utf8mb4
+       ports:
+         - 13306:3306
+volumes:
+       mysql-store:
+       
+       
+shinya@DESKTOP-8BDL7KA:~/git/rdbms-docker/mysql$ cat .env
+DB_NAME=POC
+DB_USER=admin
+DB_PASSWORD=password
+DB_ROOT_PASSWORD=password
+
+shinya@DESKTOP-8BDL7KA:~/git/rdbms-docker/mysql$ docker-compose -f ./docker-compose-with-env-and-volume.yml up -d
+Creating network "mysql_default" with the default driver
+Creating volume "mysql_mysql-store" with default driver
+Creating mysql_db_1 ...
+Creating mysql_db_1 ... done
+
+shinya@DESKTOP-8BDL7KA:~/git/rdbms-docker/mysql$ mysql -h 127.0.0.1 -P 13306 -u root -p
+Enter password:
+ERROR 2013 (HY000): Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+shinya@DESKTOP-8BDL7KA:~/git/rdbms-docker/mysql$ mysql -h 127.0.0.1 -P 13306 -u root -p
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.27 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> select @@version;
++-----------+
+| @@version |
++-----------+
+| 8.0.27    |
++-----------+
+1 row in set (0.00 sec)
+
+mysql>
+
+```
+
+
 
 
 ### NOTE (LOGIN to the Docker) 
