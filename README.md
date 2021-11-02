@@ -53,3 +53,19 @@ root@DESKTOP-8BDL7KA:# docker-compose ps
 mysql_db_1   docker-entrypoint.sh mysqld   Exit 0
 
 ```
+
+### NOTE (LOGIN to the Docker) 
+
+```
+shinya@DESKTOP-8BDL7KA:~/git/rdbms-docker/mysql$ docker-compose ps
+   Name                Command             State                           Ports
+--------------------------------------------------------------------------------------------------------
+mysql_db_1   docker-entrypoint.sh mysqld   Up      0.0.0.0:13306->3306/tcp,:::13306->3306/tcp, 33060/tcp
+
+shinya@DESKTOP-8BDL7KA:~/git/rdbms-docker/mysql$ docker-compose exec db mysql -V
+mysql  Ver 8.0.27 for Linux on x86_64 (MySQL Community Server - GPL)
+
+shinya@DESKTOP-8BDL7KA:~/git/rdbms-docker/mysql$ docker-compose exec db bash
+root@0ba49c28c5f4:/# exit
+exit
+```
