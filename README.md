@@ -228,7 +228,9 @@ Bye
 #### docker-compose-with-volume.yml (DATA is removed by volumes option)
 
 - stop and down is not remove mysql objects
-- down --volume or down --volumes will remove the volume and data.
+- down --volumes will remove the volume and data.
+
+※ ここではファイルを指定しています。Defaultではdocker-compose.ymlが読み込まれる為。
 
 ```
 shinya@DESKTOP-8BDL7KA:~/git/rdbms-docker/mysql$ docker-compose -f ./docker-compose-with-volume.yml up -d
@@ -322,7 +324,7 @@ shinya@DESKTOP-8BDL7KA:~/git/rdbms-docker/mysql$ docker-compose ps
 mysql_db_1   docker-entrypoint.sh mysqld   Up      0.0.0.0:13306->3306/tcp,:::13306->3306/tcp, 33060/tcp
 
 
-shinya@DESKTOP-8BDL7KA:~/git/rdbms-docker/mysql$ docker-compose stop
+shinya@DESKTOP-8BDL7KA:~/git/rdbms-docker/mysql$ docker-compose -f ./docker-compose-with-volume.yml stop
 Stopping mysql_db_1 ... done
 
 shinya@DESKTOP-8BDL7KA:~/git/rdbms-docker/mysql$ docker-compose -f ./docker-compose-with-volume.yml up -d
@@ -354,7 +356,7 @@ mysql> select * from POC.sensor;
 mysql> exit
 Bye
 
-shinya@DESKTOP-8BDL7KA:~/git/rdbms-docker/mysql$ docker-compose down
+shinya@DESKTOP-8BDL7KA:~/git/rdbms-docker/mysql$ docker-compose -f ./docker-compose-with-volume.yml down
 Stopping mysql_db_1 ... done
 Removing mysql_db_1 ... done
 Removing network mysql_default
@@ -390,13 +392,12 @@ mysql> exit
 Bye
 
 
-/*** docker-compose down --volume でも docker-compose down --volumes ***/
-
-shinya@DESKTOP-8BDL7KA:~/git/rdbms-docker/mysql$ docker-compose down --volume
+shinya@DESKTOP-8BDL7KA:~/git/rdbms-docker/mysql$ docker-compose -f ./docker-compose-with-volume.yml down --volumes
 Stopping mysql_db_1 ... done
 Removing mysql_db_1 ... done
 Removing network mysql_default
 Removing volume mysql_mysql-store
+shinya@DESKTOP-8BDL7KA:~/git/rdbms-docker/mysql$
 
 shinya@DESKTOP-8BDL7KA:~/git/rdbms-docker/mysql$ docker-compose -f ./docker-compose-with-volume.yml up -d
 Creating network "mysql_default" with the default driver
