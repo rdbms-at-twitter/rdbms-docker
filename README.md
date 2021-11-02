@@ -242,6 +242,26 @@ shinya@DESKTOP-8BDL7KA:~/git/rdbms-docker/mysql$ docker-compose ps
 --------------------------------------------------------------------------------------------------------
 mysql_db_1   docker-entrypoint.sh mysqld   Up      0.0.0.0:13306->3306/tcp,:::13306->3306/tcp, 33060/tcp
 
+
+shinya@DESKTOP-8BDL7KA:~/git/rdbms-docker/mysql$ docker volume ls
+DRIVER    VOLUME NAME
+local     mysql_mysql-store
+shinya@DESKTOP-8BDL7KA:~/git/rdbms-docker/mysql$ docker volume inspect mysql_mysql-store
+[
+    {
+        "CreatedAt": "2021-11-02T14:44:24+09:00",
+        "Driver": "local",
+        "Labels": {
+            "com.docker.compose.project": "mysql",
+            "com.docker.compose.volume": "mysql-store"
+        },
+        "Mountpoint": "/var/lib/docker/volumes/mysql_mysql-store/_data",
+        "Name": "mysql_mysql-store",
+        "Options": null,
+        "Scope": "local"
+    }
+]
+
 shinya@DESKTOP-8BDL7KA:~/git/rdbms-docker/mysql$ mysql -h 127.0.0.1 -P 13306 -u root -p
 Enter password:
 Welcome to the MySQL monitor.  Commands end with ; or \g.
