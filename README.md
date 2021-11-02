@@ -1,6 +1,9 @@
 # rdbms-docker
 This repository is used for creating rdbms docker images
 
+Please read detail information about docker-compose.
+https://docs.docker.jp/compose/toc.html
+
 
 ## MySQL
 
