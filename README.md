@@ -4,7 +4,7 @@ This repository is used for creating rdbms docker images
 
 ## MySQL
 
-#### docker-compose.yml (DATA is not removed volumes)
+#### docker-compose.yml (DATA is not removed volumes option)
 
 - stop and down is not remove mysql objects
 - down --volume or down --volumes will not remove the volume and data.
