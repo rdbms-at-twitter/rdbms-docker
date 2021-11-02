@@ -430,7 +430,8 @@ mysql>
 
 ### Using .env file for storing not shareable information.
 
-※　アカウントやパスワードを環境変数に入れています。（Gitで共有出来ない情報をローカルのみに保持）
+- アカウントやパスワードを環境変数に入れています。（Gitで共有出来ない情報をローカルのみに保持）
+- git ignoreにて.envは除外しておいてください。
 
 ```
 shinya@DESKTOP-8BDL7KA:~/git/rdbms-docker/mysql$ cat docker-compose-with-env-and-volume.yml
