@@ -472,9 +472,6 @@ Creating mysql_db_1 ... done
 
 shinya@DESKTOP-8BDL7KA:~/git/rdbms-docker/mysql$ mysql -h 127.0.0.1 -P 13306 -u root -p
 Enter password:
-ERROR 2013 (HY000): Lost connection to MySQL server at 'reading initial communication packet', system error: 2
-shinya@DESKTOP-8BDL7KA:~/git/rdbms-docker/mysql$ mysql -h 127.0.0.1 -P 13306 -u root -p
-Enter password:
 Welcome to the MySQL monitor.  Commands end with ; or \g.
 Your MySQL connection id is 8
 Server version: 8.0.27 MySQL Community Server - GPL
