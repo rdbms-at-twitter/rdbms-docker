@@ -1,5 +1,7 @@
-### In case of PostgreSQL
+## In case of PostgreSQL
 
+
+#### Docker Compose for PostgreSQL with Volume
 
 ```
 shinya@DESKTOP-8BDL7KA:~/git/rdbms-docker/postgresql$ sudo service docker start
@@ -104,6 +106,72 @@ postgres=#
 
 ```
 
+#### Docker Compose for PostgreSQL with PostGIS
 
 
+```
+shinya@DESKTOP-8BDL7KA:~/git/rdbms-docker/postgresql$ docker-compose -f ./docker-compose-with-postgis.yml up -d
+Creating network "postgresql_default" with the default driver
+Creating volume "postgresql_postgis-store" with default driver
+Pulling postgis (postgis/postgis:latest)...
+latest: Pulling from postgis/postgis
+7d63c13d9b9b: Already exists
+cad0f9d5f5fe: Already exists
+ff74a7a559cb: Already exists
+c43dfd845683: Already exists
+e554331369f5: Already exists
+d25d54a3ac3a: Already exists
+bbc6df00588c: Already exists
+d4deb2e86480: Already exists
+d4132927c0d9: Pull complete
+3d03efa70ed1: Pull complete
+645312b7d892: Pull complete
+3cc7074f2000: Pull complete
+4e6d0469c332: Pull complete
+491db3867d77: Pull complete
+4c11382a9f43: Pull complete
+77fa4330ea15: Pull complete
+Digest: sha256:126a86e4b944894f9140bcfb210593e9725963582c8bcab621db1422ab93d648
+Status: Downloaded newer image for postgis/postgis:latest
+Creating postgresql_postgis_1 ...
+Creating postgresql_postgis_1 ... done
+shinya@DESKTOP-8BDL7KA:~/git/rdbms-docker/postgresql$
+
+shinya@DESKTOP-8BDL7KA:~/git/rdbms-docker/postgresql$ docker-compose exec postgres psql --username=postgres
+psql (13.4 (Debian 13.4-4.pgdg110+1))
+Type "help" for help.
+
+postgres=# \c POC
+You are now connected to database "POC" as user "postgres".
+POC=# CREATE EXTENSION IF NOT EXISTS postgis;
+CREATE EXTENSION
+POC=# CREATE TABLE IF NOT EXISTS T_GIS
+(
+    id     int PRIMARY KEY,
+    geom   GEOMETRY(POINT, 4612)
+);
+CREATE TABLE
+POC=# SELECT PostGIS_full_version();
+                                                                       postgis_full_version
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ POSTGIS="3.1.4 ded6c34" [EXTENSION] PGSQL="130" GEOS="3.9.0-CAPI-1.16.2" PROJ="7.2.1" LIBXML="2.9.10" LIBJSON="0.15" LIBPROTOBUF="1.3.3" WAGYU="0.5.0 (Internal)"
+(1 row)
+
+POC=# SELECT ST_GeoHash(ST_SetSRID(ST_MakePoint(139.777254,35.713768),4326));
+      st_geohash
+----------------------
+ xn77htqxy0fu2t0y69sv
+(1 row)
+
+POC=#
+
+
+```
+
+
+#### Information
+
+https://hub.docker.com/_/postgres
+https://registry.hub.docker.com/r/postgis/postgis/
+http://postgis.net/
 
