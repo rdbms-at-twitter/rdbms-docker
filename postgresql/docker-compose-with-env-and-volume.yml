@@ -7,10 +7,10 @@ services:
     # container_name: postgresql
     restart: always
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-      PGPASSWORD: password
-      POSTGRES_DB: POC
+      POSTGRES_USER: ${PG_USER}
+      POSTGRES_PASSWORD: ${PG_PASSWORD}
+      PGPASSWORD: ${PG_ROOT_PASSWORD}
+      POSTGRES_DB: ${PG_DB}
       POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
       TZ: "Asia/Tokyo"
     ports:
