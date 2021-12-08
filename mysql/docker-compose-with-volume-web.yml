@@ -1,0 +1,35 @@
+version: "3"
+services:
+ nginx:
+        build: ./nginx/
+        container_name: nginx-container
+        ports:
+          - 80:80
+        links:
+          - php
+        volumes:
+          - ./www/html/:/var/www/html/
+ php:
+        build: ./php/
+        container_name: php-container
+        expose:
+          - 9000
+        links:
+          - db
+        volumes:
+          - ./www/html/:/var/www/html/
+ db:
+        image: mysql:8.0
+        container_name: mysql-container
+        volumes:
+          - ./docker/mysql/data:/var/lib/mysql
+          - ./docker/mysql/logs:/var/log/mysql
+          - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+        environment:
+          - MYSQL_DATABASE=POC
+          - MYSQL_USER=admin
+          - MYSQL_PASSWORD=password
+          - MYSQL_ROOT_PASSWORD=password
+          - TZ="Asia/Tokyo"
+        ports:
+          - 3306:3306
