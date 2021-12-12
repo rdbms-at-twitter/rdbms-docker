@@ -4,7 +4,7 @@
   </head>   
 
      <body>  
-      <h1>Hello World!</h1>  
+      <h1>PHP and MySQL Config on this evnironment</h1>  
       <p><?php echo 'We are running PHP, version: ' . phpversion(); ?></p>
 
 
