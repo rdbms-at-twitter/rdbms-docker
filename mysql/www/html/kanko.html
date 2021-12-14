@@ -19,7 +19,7 @@
   </head>
 
   <body>
-    <H1>&nbsp東京観光マップ</H1>
+    <H1>&nbsp観光マップ(東京駅から±630km : Geohash:xn)</H1>
     <div id="map"></div>
     <script>
       var customLabel = {
@@ -62,7 +62,7 @@
 
             Array.prototype.forEach.call(markers, function(markerElem) {
               var name = markerElem.getAttribute('name');
-              var address = markerElem.getAttribute('address');
+              var address = markerElem.getAttribute('category');
               var type = markerElem.getAttribute('type');
               var point = new google.maps.LatLng(
                   parseFloat(markerElem.getAttribute('lat')),
@@ -113,7 +113,7 @@
       function doNothing() {}
     </script>
      <script async defer
-     src="https://maps.googleapis.com/maps/api/js?key=ここに鍵を設定して下さい。">
+     src="https://maps.googleapis.com/maps/api/js?key=＜こちらにAPIキーを設定して下さい＞&callback=initMap">
       </script>
     <p>&nbsp参照: 国土交通省(観光資源データ)</p>
   </body>
