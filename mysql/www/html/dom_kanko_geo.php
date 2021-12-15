@@ -30,14 +30,14 @@ $connection = new PDO("mysql:host={$host};dbname={$database};charset=utf8", $use
 //ST_Y(SHAPE) AS 'lng','kanko' as 'type' FROM p12a_14_13_utf8
 //SQL;
 
-// こちらは全国(メモ：緯度経度が東京と入れ替わっている)
-// 地図表示するデータが多いので、GEOHASH = xn7に絞り込み。
+// こちらは全国(メモ：SRIDがインポート時に適切に設定されるようにshp2mysqlを利用)
+// 地図表示するデータが多いので、GEOHASH = xnに絞り込み。
 $sql = <<<SQL
 select p12_003 as 'name',
 p12_004 as 'category',
-ST_Y(SHAPE) AS "lat", ST_X(SHAPE) AS "lng", 
-'kanko' as 'type'  FROM p12_10_g_tourismresource_point_utf8
-where ST_Geohash(ST_X(SHAPE),ST_Y(SHAPE),2) = 'xn'
+ST_X(geom) AS "lat",ST_Y(geom) AS "lng", 
+'kanko' as 'type'  FROM `p12-10-g_tourismresource_point`
+where ST_Geohash(ST_Y(geom),ST_X(geom),2) = 'xn'
 SQL;
 
 // Iterate through the rows, adding XML nodes for each
